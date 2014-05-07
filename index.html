@@ -8,18 +8,23 @@
     <script>
 
       $(document).ready(function(){
+        var maxVisible = 25; // Limits how many tweets are displayed at once
+
         var $body = $('body');
         $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
-
+        setInterval(function(){ // Shows new tweets every 3 seconds
+          var index = streams.home.length - 1;
+          var latest = index;
+          $body.children('div').remove(); // Clean up old tweets from DOM
+          while(index >= 0 && index > latest - maxVisible){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>'); // Create div, then add content
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.appendTo($body); // Add to DOM
+            index -= 1;
+          }
+        }, 3000);
       });
 
     </script>
