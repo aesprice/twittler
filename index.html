@@ -23,7 +23,8 @@
         while(index >= 0 && index > latest - maxVisible){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>'); // Create div, then add content
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          var timeStamp = '(' + tweet.created_at.toDateString() + ' - ' + tweet.created_at.toLocaleTimeString() + ')'; // Parse time stamp into a string
+          $tweet.text(timeStamp + ' @' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body); // Add to DOM
           index -= 1;
         }
