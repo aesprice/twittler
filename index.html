@@ -13,6 +13,9 @@
       .message{
         color: #0000aa;
       }
+      .user{
+        color: #6666ff;
+      }
       .time{
         margin: 2px;
         padding: 2px;
@@ -44,7 +47,7 @@
           var tweet = streams.home[index];
           var $tweet = $('<div class="container"></div>'); // Create div, then add content
           var timeStamp = '(' + tweet.created_at.toDateString() + ' - ' + tweet.created_at.toLocaleTimeString() + ')'; // Parse time stamp into a string
-          $tweet.append('<div class="message">@' + tweet.user + ': ' + tweet.message + '</div>');
+          $tweet.append('<div class="message"><span class="user">@' + tweet.user + '</span> ' + tweet.message + '</div>');
           $tweet.append('<div class="time">' + timeStamp + '</div>');
           $tweet.appendTo($body); // Add to DOM
           index -= 1;
