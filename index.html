@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .container{
+        margin: 6px;
+        padding: 2px;
+        border-radius: 6px;
+        background-color: #cfccff;
+      }
+    </style>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
@@ -22,7 +30,7 @@
         $body.children('div').remove(); // Clean up old tweets from DOM
         while(index >= 0 && index > latest - maxVisible){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>'); // Create div, then add content
+          var $tweet = $('<div class="container"></div>'); // Create div, then add content
           var timeStamp = '(' + tweet.created_at.toDateString() + ' - ' + tweet.created_at.toLocaleTimeString() + ')'; // Parse time stamp into a string
           $tweet.text(timeStamp + ' @' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body); // Add to DOM
