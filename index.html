@@ -3,10 +3,22 @@
   <head>
     <style>
       .container{
-        margin: 6px;
+        margin: auto;
+        margin-top: 12px;
+        padding: 2px;
+        border-radius: 10px;
+        width: 600px;
+        background-color: #cfccff;
+      }
+      .message{
+        color: #0000aa;
+      }
+      .time{
+        margin: 2px;
         padding: 2px;
         border-radius: 6px;
-        background-color: #cfccff;
+        background-color: #aa99ff; 
+        color: #777777;
       }
     </style>
     <script src="jquery.js"></script>
@@ -32,7 +44,8 @@
           var tweet = streams.home[index];
           var $tweet = $('<div class="container"></div>'); // Create div, then add content
           var timeStamp = '(' + tweet.created_at.toDateString() + ' - ' + tweet.created_at.toLocaleTimeString() + ')'; // Parse time stamp into a string
-          $tweet.text(timeStamp + ' @' + tweet.user + ': ' + tweet.message);
+          $tweet.append('<div class="message">@' + tweet.user + ': ' + tweet.message + '</div>');
+          $tweet.append('<div class="time">' + timeStamp + '</div>');
           $tweet.appendTo($body); // Add to DOM
           index -= 1;
         }
