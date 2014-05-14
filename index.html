@@ -8,7 +8,7 @@
         padding: 2px;
         border: 3px solid #bcbcff;
         border-radius: 10px;
-        width: 600px;
+        width: 800px;
         background-color: #cdcdff;
       }
       .message{
@@ -69,6 +69,7 @@
         $(".message").on("click", "button", function(){ // Clicking a username changes our focused user
           var userButton = $(this).closest(".user").text();
           showUser = userButton.slice(1, userButton.length);
+          update();
         });
       }
 
