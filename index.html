@@ -20,6 +20,8 @@
         color: #6868ff;
         font-family: Eurostile; sans-serif;
         font-size: 1em;
+        border: none;
+        background-color: transparent;
       }
       .time{
         margin: 2px;
@@ -36,6 +38,7 @@
     <script>
       var $body = $('body');
       var maxVisible = 25; // Limits how many tweets are displayed at once
+      var showUser = ""; // Represents which user we're focused on
 
       $(document).ready(function(){
         $body.html('');
@@ -46,17 +49,27 @@
 
       function update(){
         var index = streams.home.length - 1;
-        var latest = index;
+        var displayed = 0;
         $body.children('div').remove(); // Clean up old tweets from DOM
-        while(index >= 0 && index > latest - maxVisible){
+        while(index >= 0 && displayed < maxVisible){
           var tweet = streams.home[index];
+          console.log(tweet);
+          if(showUser != "" && showUser != tweet.user){ // Don't display users we're not focusing on
+            index -= 1;
+            continue;
+          }
           var $tweet = $('<div class="container"></div>'); // Create div, then add content
           var timeStamp = '(' + tweet.created_at.toDateString() + ' - ' + tweet.created_at.toLocaleTimeString() + ')'; // Parse time stamp into a string
-          $tweet.append('<div class="message"><span class="user">@' + tweet.user + '</span> ' + tweet.message + '</div>');
+          $tweet.append('<div class="message"><button class="user">@' + tweet.user + '</button> ' + tweet.message + '</div>');
           $tweet.append('<div class="time">' + timeStamp + '</div>');
           $tweet.appendTo($body); // Add to DOM
+          displayed += 1;
           index -= 1;
         }
+        $(".message").on("click", "button", function(){ // Clicking a username changes our focused user
+          var userButton = $(this).closest(".user").text();
+          showUser = userButton.slice(1, userButton.length);
+        });
       }
 
     </script>
